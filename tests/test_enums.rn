@@ -1,1 +1,37 @@
+~~ Test: Enums and match statement
+
+enum Color {
+    RED   = 0,
+    GREEN = 1,
+    BLUE  = 2
+}
+
+enum Status {
+    OK,
+    ERROR,
+    PENDING
+}
+
+string colorName(Color c) {
+    match (c) {
+        case Color::RED:   { return fin "Red";   }
+        case Color::GREEN: { return fin "Green"; }
+        case Color::BLUE:  { return fin "Blue";  }
+        default:           { return fin "Unknown"; }
+    }
+}
+
+riven core {
+    Color c = Color::GREEN;
+    Imprint("Color: ", colorName(c));
+
+    Status s = Status::OK;
+    match (s) {
+        case Status::OK:      { Imprint("Status: OK");      }
+        case Status::ERROR:   { Imprint("Status: ERROR");   }
+        case Status::PENDING: { Imprint("Status: PENDING"); }
+        default:              { Imprint("Status: Unknown"); }
+    }
+    return fin;
+}
 
