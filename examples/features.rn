@@ -1,1 +1,232 @@
+<< 
+  Riven Language - Comprehensive Feature Demo
+  File: examples/features.rn
+  Shows: constants, input, if/altif/else, loops, increment/decrement,
+         functions, structs, classes, enums, match, error handling, etc.
+>>
+
+~~ ── Imports ──────────────────────────────────────────────────────────────
+consistof "math.rh"
+
+~~ ── Constants (firm) ────────────────────────────────────────────────────
+firm int MAX_SIZE = 100;
+firm string APP_NAME = "Riven Demo";
+
+~~ ── Enum ────────────────────────────────────────────────────────────────
+enum Direction {
+    NORTH = 0,
+    SOUTH,
+    EAST,
+    WEST
+}
+
+~~ ── Struct ──────────────────────────────────────────────────────────────
+struct Point {
+    int x;
+    int y;
+
+    void print() {
+        Imprint("Point(", x, ", ", y, ")");
+    }
+}
+
+~~ ── Class ───────────────────────────────────────────────────────────────
+class Animal {
+pub:
+    string name;
+    int age;
+
+pub:
+    void speak() {
+        Imprint(name, " makes a sound!");
+    }
+
+    void birthday() {
+        age+>;      ~~ Riven increment (+>)
+        Imprint(name, " is now ", age, " years old.");
+    }
+}
+
+class Dog : Animal {
+pub:
+    string breed;
+
+pub:
+    void speak() {
+        Imprint(name, " says: Woof!");
+    }
+}
+
+~~ ── Free functions ──────────────────────────────────────────────────────
+int factorial(int n) {
+    if (n <= 1) {
+        return fin 1;
+    }
+    return fin n * factorial(n - 1);
+}
+
+int fibonacci(int n) {
+    if (n <= 0) return fin 0;
+    if (n == 1) return fin 1;
+    int a = 0;
+    int b = 1;
+    int i = 2;
+    while (i <= n) {
+        int temp = a + b;
+        a = b;
+        b = temp;
+        i+>;        ~~ increment
+    }
+    return fin b;
+}
+
+string gradeToLetter(int score) {
+    match (score / 10) {
+        case 10: { return fin "A+"; }
+        case 9:  { return fin "A";  }
+        case 8:  { return fin "B";  }
+        case 7:  { return fin "C";  }
+        case 6:  { return fin "D";  }
+        default: { return fin "F";  }
+    }
+}
+
+~~ ── Entry Point ─────────────────────────────────────────────────────────
+riven core {
+    ~~ Basic output
+    Imprint("══════════════════════════════════");
+    Imprint("  Welcome to ", APP_NAME);
+    Imprint("══════════════════════════════════");
+
+    ~~ Constants
+    Imprint("Max Size: ", MAX_SIZE);
+
+    ~~ Variables
+    int count = 0;
+    float pi = 3.14159;
+    bool active = true;
+    string msg = "Riven is awesome!";
+
+    Imprint(msg);
+    Imprint("PI = ", pi);
+    Imprint("Active = ", active);
+
+    ~~ Increment / Decrement
+    Imprint("\n── Increment/Decrement ──");
+    count+>;            ~~ count = 1
+    count+>;            ~~ count = 2
+    Imprint("After 2 increments: ", count);
+    count-<;            ~~ count = 1
+    Imprint("After 1 decrement: ", count);
+
+    ~~ if / altif / else
+    Imprint("\n── Conditionals ──");
+    int score = 85;
+    if (score >= 90) {
+        Imprint("Grade: A");
+    } altif (score >= 80) {
+        Imprint("Grade: B");
+    } altif (score >= 70) {
+        Imprint("Grade: C");
+    } else {
+        Imprint("Grade: F");
+    }
+
+    ~~ User input
+    Imprint("\n── Input ──");
+    Imprint("Enter a number for factorial:");
+    int num = 0;
+    scanq(num);
+    Imprint("Factorial of ", num, " = ", factorial(num));
+
+    ~~ Fibonacci
+    Imprint("\n── Fibonacci ──");
+    int i = 0;
+    while (i < 10) {
+        Imprint("fib(", i, ") = ", fibonacci(i));
+        i+>;
+    }
+
+    ~~ For loop
+    Imprint("\n── For Loop ──");
+    for (int j = 0; j < 5; j+>) {
+        Imprint("  j = ", j);
+    }
+
+    ~~ Do-while
+    Imprint("\n── Do-While ──");
+    int x = 0;
+    do {
+        Imprint("  x = ", x);
+        x+>;
+    } while (x < 3);
+
+    ~~ Struct usage
+    Imprint("\n── Struct ──");
+    Point p;
+    p.x = 10;
+    p.y = 20;
+    p.print();
+
+    ~~ Class usage
+    Imprint("\n── Class ──");
+    Animal cat;
+    cat.name = "Whiskers";
+    cat.age = 3;
+    cat.speak();
+    cat.birthday();
+
+    Dog rex;
+    rex.name = "Rex";
+    rex.age = 5;
+    rex.breed = "German Shepherd";
+    rex.speak();
+
+    ~~ Match statement
+    Imprint("\n── Match ──");
+    Direction dir = Direction::NORTH;
+    match (dir) {
+        case Direction::NORTH: { Imprint("Going North"); }
+        case Direction::SOUTH: { Imprint("Going South"); }
+        case Direction::EAST:  { Imprint("Going East");  }
+        case Direction::WEST:  { Imprint("Going West");  }
+        default: { Imprint("Unknown direction"); }
+    }
+
+    ~~ Ternary
+    Imprint("\n── Ternary ──");
+    int val = 42;
+    string result = (val > 0) ? "positive" : "non-positive";
+    Imprint("42 is ", result);
+
+    ~~ Error handling
+    Imprint("\n── Try/Catch ──");
+    try {
+        if (num < 0) {
+            throw "Negative numbers not supported";
+        }
+        Imprint("No error thrown.");
+    } catch (string e) {
+        Imprint("Caught error: ", e);
+    }
+
+    ~~ Grade check
+    Imprint("\n── Grade Match ──");
+    Imprint("Score 85 = Grade: ", gradeToLetter(85));
+    Imprint("Score 55 = Grade: ", gradeToLetter(55));
+
+    ~~ Unsafe block
+    Imprint("\n── Unsafe Block ──");
+    unsafe {
+        int* ptr = new int(99);
+        Imprint("Unsafe ptr value: ", *ptr);
+        delete ptr;
+    }
+
+    Imprint("\n══════════════════════════════════");
+    Imprint("  Program finished successfully.");
+    Imprint("══════════════════════════════════");
+
+    return fin;
+}
 
