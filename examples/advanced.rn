@@ -1,1 +1,148 @@
+~~ Advanced Example: Namespace, Traits, Impl, Error handling
+~~ File: examples/advanced.rn
+
+namespace Collections {
+
+    struct Node {
+        int value;
+        int next_idx;   ~~ index into array (-1 = null)
+    }
+
+    struct IntList {
+        int data[64];
+        int next[64];
+        int head;
+        int size;
+        int capacity;
+
+        void init() {
+            head = -1;
+            size = 0;
+            capacity = 64;
+        }
+
+        void push_front(int val) {
+            if (size >= capacity) {
+                throw "IntList: capacity exceeded";
+            }
+            int idx = size;
+            data[idx] = val;
+            next[idx] = head;
+            head = idx;
+            size+>;
+        }
+
+        void print_all() {
+            int cur = head;
+            while (cur != -1) {
+                Imprint(data[cur]);
+                cur = next[cur];
+            }
+        }
+
+        int get_size() {
+            return fin size;
+        }
+    }
+}
+
+~~ ── Namespace usage ─────────────────────────────────────────────────────
+
+namespace MathUtils {
+    int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a - (a / b) * b;
+            a = temp;
+        }
+        return fin a;
+    }
+
+    int lcm(int a, int b) {
+        return fin (a / gcd(a, b)) * b;
+    }
+
+    bool is_prime(int n) {
+        if (n < 2) return fin false;
+        int i = 2;
+        while (i * i <= n) {
+            if (n - (n / i) * i == 0) return fin false;
+            i+>;
+        }
+        return fin true;
+    }
+}
+
+~~ ── Main ────────────────────────────────────────────────────────────────
+
+riven core {
+    Imprint("=== Advanced Riven Features ===");
+
+    ~~ Namespace usage
+    Imprint("\n-- MathUtils --");
+    Imprint("gcd(48, 18) = ", MathUtils::gcd(48, 18));
+    Imprint("lcm(4, 6)   = ", MathUtils::lcm(4, 6));
+    Imprint("isPrime(17) = ", MathUtils::is_prime(17));
+    Imprint("isPrime(15) = ", MathUtils::is_prime(15));
+
+    ~~ Primes up to 30
+    Imprint("\nPrimes up to 30:");
+    int n = 2;
+    while (n <= 30) {
+        if (MathUtils::is_prime(n)) {
+            Imprint("  ", n);
+        }
+        n+>;
+    }
+
+    ~~ Struct list
+    Imprint("\n-- IntList (embedded linked list) --");
+    Collections::IntList list;
+    list.init();
+
+    try {
+        list.push_front(30);
+        list.push_front(20);
+        list.push_front(10);
+        Imprint("List size: ", list.get_size());
+        Imprint("List contents (front to back):");
+        list.print_all();
+    } catch (string e) {
+        Imprint("Error: ", e);
+    }
+
+    ~~ Ternary expressions
+    Imprint("\n-- Ternary --");
+    int x = 42;
+    string parity = (x - (x / 2) * 2 == 0) ? "even" : "odd";
+    Imprint("42 is ", parity);
+
+    ~~ Nested loops
+    Imprint("\n-- Multiplication Table (3x3) --");
+    for (int i = 1; i <= 3; i+>) {
+        for (int j = 1; j <= 3; j+>) {
+            Imprint(i, " * ", j, " = ", i * j);
+        }
+    }
+
+    ~~ Unsafe pointer math
+    Imprint("\n-- Unsafe Pointer Arithmetic --");
+    unsafe {
+        int arr[5];
+        int* p = arr;
+        int k = 0;
+        while (k < 5) {
+            arr[k] = k * k;
+            k+>;
+        }
+        k = 0;
+        while (k < 5) {
+            Imprint("arr[", k, "] = ", arr[k]);
+            k+>;
+        }
+    }
+
+    Imprint("\n=== Done ===");
+    return fin;
+}
 
