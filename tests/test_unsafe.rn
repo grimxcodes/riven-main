@@ -1,1 +1,23 @@
+~~ Test: Unsafe blocks, pointers, dynamic memory
+
+riven core {
+    ~~ Basic unsafe pointer operations
+    unsafe {
+        int* p = new int(42);
+        Imprint("Pointer value: ", *p);
+        *p = 100;
+        Imprint("Modified value: ", *p);
+        delete p;
+    }
+
+    ~~ Pointer arithmetic in unsafe
+    unsafe {
+        int x = 10;
+        int* px = &x;
+        Imprint("Address dereference: ", *px);
+    }
+
+    Imprint("Unsafe blocks completed safely.");
+    return fin;
+}
 
