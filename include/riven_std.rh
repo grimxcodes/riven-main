@@ -1,1 +1,37 @@
+/*
+ * riven_std.rh  — Riven Standard Library
+ * Include with: consistof "riven_std.rh"
+ *
+ * This header is pre-transpiled to C++ for use with rivc.
+ * It exposes common utilities as Riven-compatible declarations.
+ */
+
+/* ── Math utilities ───────────────────────────────────────────────────── */
+int    abs_i(int x);
+float  abs_f(float x);
+float  sqrt_f(float x);
+float  pow_f(float base, float exp);
+float  floor_f(float x);
+float  ceil_f(float x);
+int    min_i(int a, int b);
+int    max_i(int a, int b);
+float  clamp_f(float v, float lo, float hi);
+
+/* ── String utilities ─────────────────────────────────────────────────── */
+int    str_len(string s);
+string str_upper(string s);
+string str_lower(string s);
+string str_substr(string s, int start, int len);
+int    str_find(string haystack, string needle);
+string str_concat(string a, string b);
+string int_to_str(int n);
+string float_to_str(float f);
+int    str_to_int(string s);
+float  str_to_float(string s);
+
+/* ── I/O utilities ────────────────────────────────────────────────────── */
+void   print_line(string s);
+void   print_int(int n);
+void   print_float(float f);
+string read_line();
 
