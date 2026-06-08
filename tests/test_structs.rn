@@ -1,1 +1,54 @@
+~~ Test: Structs, Classes, Inheritance
+
+struct Vec2 {
+    float x;
+    float y;
+
+    float length() {
+        return fin x * x + y * y;
+    }
+}
+
+class Shape {
+pub:
+    string color;
+    float area;
+
+pub:
+    void describe() {
+        Imprint("Shape color=", color, " area=", area);
+    }
+}
+
+class Rectangle : Shape {
+pub:
+    float width;
+    float height;
+
+pub:
+    void compute() {
+        area = width * height;
+    }
+
+    void describe() {
+        Imprint("Rectangle ", width, "x", height, " color=", color);
+    }
+}
+
+riven core {
+    Vec2 v;
+    v.x = 3.0;
+    v.y = 4.0;
+    Imprint("Vec2 length^2 = ", v.length());
+
+    Rectangle r;
+    r.color = "red";
+    r.width = 5.0;
+    r.height = 3.0;
+    r.compute();
+    r.describe();
+    Imprint("Rectangle area = ", r.area);
+
+    return fin;
+}
 
