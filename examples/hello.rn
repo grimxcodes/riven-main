@@ -1,1 +1,8 @@
+~~ Hello World in Riven Language
+~~ File: examples/hello.rn
+
+riven core {
+    Imprint("Hello, World!");
+    return fin;
+}
 
