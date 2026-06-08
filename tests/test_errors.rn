@@ -1,1 +1,36 @@
+~~ Test: Try, Catch, Throw
+
+int safeDivide(int a, int b) {
+    if (b == 0) {
+        throw "Division by zero!";
+    }
+    return fin a / b;
+}
+
+riven core {
+    try {
+        int result = safeDivide(10, 2);
+        Imprint("10 / 2 = ", result);
+
+        int bad = safeDivide(5, 0);
+        Imprint("Should not reach here");
+    } catch (string e) {
+        Imprint("Caught: ", e);
+    }
+
+    ~~ Nested try
+    try {
+        try {
+            throw "inner error";
+        } catch (string e) {
+            Imprint("Inner caught: ", e);
+            throw "rethrown";
+        }
+    } catch (string e) {
+        Imprint("Outer caught: ", e);
+    }
+
+    Imprint("Program continues normally.");
+    return fin;
+}
 
