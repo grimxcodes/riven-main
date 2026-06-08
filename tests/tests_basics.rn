@@ -1,1 +1,17 @@
 
+~~ Test: Basic I/O, increment, decrement, return fin
+riven core {
+    int x = 10;
+    x+>;
+    x+>;
+    x-<;
+    Imprint(x);     ~~ Expected: 11
+
+    firm int LIMIT = 5;
+    int i = 0;
+    while (i < LIMIT) {
+        Imprint("i = ", i);
+        i+>;
+    }
+    return fin;
+}
