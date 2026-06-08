@@ -1,1 +1,36 @@
+~~ Test: Functions, recursion, altif chains
+
+int add(int a, int b) {
+    return fin a + b;
+}
+
+int power(int base, int exp) {
+    if (exp == 0) return fin 1;
+    return fin base * power(base, exp - 1);
+}
+
+string classify(int n) {
+    if (n < 0) {
+        return fin "negative";
+    } altif (n == 0) {
+        return fin "zero";
+    } altif (n < 10) {
+        return fin "small";
+    } altif (n < 100) {
+        return fin "medium";
+    } else {
+        return fin "large";
+    }
+}
+
+riven core {
+    Imprint("add(3,4) = ", add(3, 4));
+    Imprint("power(2,8) = ", power(2, 8));
+    Imprint("classify(-5) = ", classify(-5));
+    Imprint("classify(0) = ", classify(0));
+    Imprint("classify(7) = ", classify(7));
+    Imprint("classify(42) = ", classify(42));
+    Imprint("classify(500) = ", classify(500));
+    return fin;
+}
 
